@@ -1,0 +1,60 @@
+{
+    "apps": [
+        {
+            "id": "mikanxr",
+            "name": "MikanXR",
+            "slot": "editor",
+            "sources": [{ "kind": "bundled", "exe": "MikanXR/Mikan.exe" }]
+        },
+        {
+            "id": "mikantrack",
+            "name": "MikanTrack",
+            "slot": "tracking",
+            "sources": [{ "kind": "bundled", "exe": "MikanTrack/MikanTrack.exe" }]
+        },
+        {
+            "id": "xr-animator",
+            "name": "XR Animator",
+            "slot": "tracking"
+        },
+        {
+            "id": "virtual-motion-capture",
+            "name": "Virtual Motion Capture",
+            "slot": "tracking"
+        },
+        {
+            "id": "webcam-motion-capture",
+            "name": "Webcam Motion Capture",
+            "slot": "tracking"
+        },
+        {
+            "id": "custom-tracking",
+            "name": "Custom",
+            "slot": "tracking"
+        },
+        {
+            "id": "mikanstudio",
+            "name": "MikanStudio",
+            "slot": "renderer",
+            "sources": [{ "kind": "bundled", "exe": "MikanStudio/MikanStudio.exe" }]
+        },
+        {
+            "id": "vnyan",
+            "name": "VNyan",
+            "slot": "renderer",
+            "plugin": "vnyan"
+        },
+        {
+            "id": "warudo",
+            "name": "Warudo",
+            "slot": "renderer",
+            "sources": [{ "kind": "steam", "app_id": 2079120, "exe": "Warudo.exe" }],
+            "plugin": "warudo"
+        },
+        {
+            "id": "custom-renderer",
+            "name": "Custom",
+            "slot": "renderer"
+        }
+    ]
+}

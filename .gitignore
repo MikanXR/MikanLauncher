@@ -1,0 +1,12 @@
+# Build outputs
+/target/
+
+# A package tree assembled locally or by the packaging workflow
+/package/
+
+# This machine's own build folders for tools/dev_package.py
+/dev_package.local.json
+
+# Local tool state
+.claude/*
+!.claude/settings.json

@@ -1,0 +1,53 @@
+{
+  // Debugging on Windows through the C/C++ extension's MSVC debugger, which reads the
+  // PDBs Rust's MSVC target writes. Each configuration runs the Build task first, so F5
+  // always debugs the current source. A debug build keeps its console, so the launcher's
+  // own messages show in the Debug Console.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // The repository root holds the catalog but no bundled apps, so the bundled rows
+      // read as not found. Steam and browsed apps resolve as usual.
+      "name": "Launcher (repository root)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/target/debug/MikanLauncher.exe",
+      "args": ["--root", "${workspaceFolder}"],
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "preLaunchTask": "Build"
+    },
+    {
+      // An assembled package tree. The default, package/, is the one the "Dev package"
+      // task builds from this machine's own builds.
+      "name": "Launcher (package folder)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/target/debug/MikanLauncher.exe",
+      "args": ["--root", "${input:packageFolder}"],
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "preLaunchTask": "Build"
+    },
+    {
+      // Prints each slot's state as JSON and exits, with no window: the quick way to step
+      // through catalog loading, install lookup, and the plugin check.
+      "name": "Launcher --status",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/target/debug/MikanLauncher.exe",
+      "args": ["--root", "${workspaceFolder}", "--status"],
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "preLaunchTask": "Build"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "packageFolder",
+      "type": "promptString",
+      "description": "The package folder to run the launcher against",
+      "default": "${workspaceFolder}/package"
+    }
+  ]
+}

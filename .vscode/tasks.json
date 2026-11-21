@@ -1,0 +1,77 @@
+{
+  // The gates, the drive, and the run, for the Command Palette (Tasks: Run Task).
+  // "Build" is the default build task, so Ctrl+Shift+B runs cargo build over the
+  // workspace. Each gate is its own task so the one that covers an edit can be re-run
+  // alone.
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["build", "--workspace"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": ["$rustc"],
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "silent", "panel": "shared", "clear": true }
+    },
+    {
+      "label": "Test",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["test", "--workspace"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": ["$rustc"],
+      "group": "test",
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+    },
+    {
+      "label": "Clippy",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["clippy", "--workspace", "--all-targets", "--", "-D", "warnings"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": ["$rustc"],
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+    },
+    {
+      "label": "Format check",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["fmt", "--all", "--check"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+    },
+    {
+      "label": "Deny",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["deny", "check"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+    },
+    {
+      // Assembles package/ from this machine's own builds, for the "Launcher (package
+      // folder)" debug configuration.
+      "label": "Dev package",
+      "type": "shell",
+      "command": "python",
+      "args": ["tools/dev_package.py"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+    },
+    {
+      // Runs against the repository root, which holds the catalog but no bundled apps.
+      "label": "Run",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["run", "--", "--root", "."],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": ["$rustc"],
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true }
+    }
+  ]
+}

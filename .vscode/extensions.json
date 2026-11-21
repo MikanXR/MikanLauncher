@@ -1,0 +1,12 @@
+{
+  // rust-analyzer provides the Rust language features, checking with clippy per
+  // settings.json so the editor shows what the gate shows. Even Better TOML covers
+  // the Cargo manifests and deny.toml. The Slint extension covers the window's markup,
+  // with a live preview. The C/C++ extension is the debugger launch.json uses on Windows.
+  "recommendations": [
+    "rust-lang.rust-analyzer",
+    "ms-vscode.cpptools",
+    "tamasfe.even-better-toml",
+    "Slint.slint"
+  ]
+}

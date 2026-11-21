@@ -1,0 +1,168 @@
+import { AboutSlint, Button, ComboBox, GroupBox, HorizontalBox, VerticalBox } from "std-widgets.slint";
+
+// What a slot offers. Set once: the list keeps its own selection afterwards.
+export struct SlotRow {
+    title: string,
+    options: [string],
+    selected: int,
+}
+
+// What a slot shows right now. Rewritten whenever it changes.
+export struct SlotState {
+    status: string,
+    can-browse: bool,
+    action-label: string,
+    action-enabled: bool,
+    plugin-text: string,
+    // Empty when the plugin needs nothing done.
+    plugin-action: string,
+    notice: string,
+}
+
+export component MainWindow inherits Window {
+    in property <[SlotRow]> rows;
+    in property <[SlotState]> states;
+    in property <string> launcher-version;
+    in property <string> package-text;
+    in property <bool> any-launchable;
+    in property <bool> any-running;
+
+    callback select(slot: int, option: int);
+    callback browse(slot: int);
+    callback activate(slot: int);
+    callback plugin-action(slot: int);
+    callback launch-all();
+    callback stop-all();
+
+    title: "MikanXR Launcher";
+    preferred-width: 640px;
+    min-width: 520px;
+
+    about := PopupWindow {
+        x: (root.width - self.width) / 2;
+        y: 40px;
+        width: 360px;
+
+        Rectangle {
+            background: root.background;
+            border-color: #808080;
+            border-width: 1px;
+            border-radius: 4px;
+
+            VerticalBox {
+                Text {
+                    text: "MikanXR Launcher " + root.launcher-version;
+                    font-weight: 700;
+                }
+
+                if root.package-text != "": Text {
+                    text: root.package-text;
+                    wrap: word-wrap;
+                }
+
+                AboutSlint { }
+            }
+        }
+    }
+
+    VerticalBox {
+        for row[index] in root.rows: GroupBox {
+            title: row.title;
+
+            VerticalBox {
+                padding: 0;
+
+                HorizontalBox {
+                    padding: 0;
+
+                    ComboBox {
+                        horizontal-stretch: 1;
+                        model: row.options;
+                        current-index: row.selected;
+                        selected => {
+                            root.select(index, self.current-index);
+                        }
+                    }
+
+                    Button {
+                        text: "Browse...";
+                        enabled: root.states[index].can-browse;
+                        clicked => {
+                            root.browse(index);
+                        }
+                    }
+
+                    Button {
+                        min-width: 96px;
+                        text: root.states[index].action-label;
+                        enabled: root.states[index].action-enabled;
+                        clicked => {
+                            root.activate(index);
+                        }
+                    }
+                }
+
+                Text {
+                    text: root.states[index].status;
+                    overflow: elide;
+                }
+
+                if root.states[index].plugin-text != "": HorizontalBox {
+                    padding: 0;
+
+                    Text {
+                        horizontal-stretch: 1;
+                        vertical-alignment: center;
+                        text: root.states[index].plugin-text;
+                        wrap: word-wrap;
+                    }
+
+                    if root.states[index].plugin-action != "": Button {
+                        text: root.states[index].plugin-action;
+                        clicked => {
+                            root.plugin-action(index);
+                        }
+                    }
+                }
+
+                if root.states[index].notice != "": Text {
+                    text: root.states[index].notice;
+                    wrap: word-wrap;
+                    color: #c05020;
+                }
+            }
+        }
+
+        HorizontalBox {
+            padding: 0;
+
+            Button {
+                text: "Launch All";
+                primary: true;
+                enabled: root.any-launchable;
+                clicked => {
+                    root.launch-all();
+                }
+            }
+
+            Button {
+                text: "Stop All";
+                enabled: root.any-running;
+                clicked => {
+                    root.stop-all();
+                }
+            }
+
+            Rectangle {
+                horizontal-stretch: 1;
+            }
+
+            Button {
+                text: "About";
+                clicked => {
+                    about.show();
+                }
+            }
+        }
+    }
+}

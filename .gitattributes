@@ -1,0 +1,7 @@
+# Normalize line endings to LF in the repository. Working-tree endings follow each
+# machine's own core.autocrlf/core.eol setting.
+* text=auto
+
+# Cargo writes and rewrites its lock file with LF itself, so it stays LF everywhere
+# rather than flipping on every dependency change.
+Cargo.lock text eol=lf

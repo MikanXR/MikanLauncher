@@ -1,0 +1,52 @@
+# What cargo deny checks over the dependency tree: the licenses, the RustSec
+# advisories, wildcard versions, and where every crate comes from.
+
+[graph]
+# The platforms the launcher is meant to build for. The window toolkit's tree also
+# carries Android, iOS, and web crates, which never reach a build here.
+targets = ["aarch64-apple-darwin", "x86_64-pc-windows-msvc", "x86_64-unknown-linux-gnu"]
+
+[advisories]
+version = 2
+# An unmaintained crate deep in a dependency's tree is that dependency's to replace.
+# One the workspace names directly is ours to replace.
+unmaintained = "workspace"
+yanked = "deny"
+ignore = []
+
+[licenses]
+version = 2
+# Every license the tree carries, each permissive and compatible with the MIT license the
+# launcher ships under. A crate under a license not listed here fails the check, and the
+# list grows only after the license is read.
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "BSL-1.0",
+    "ISC",
+    "Zlib",
+    "Unicode-3.0",
+    # Slint, taken under its royalty-free license rather than the GPL: it covers desktop
+    # applications and asks that the About dialog show the AboutSlint widget, which the
+    # window's About dialog does.
+    "LicenseRef-Slint-Royalty-free-2.0",
+]
+confidence-threshold = 0.8
+exceptions = [
+    # The directories lookup's helper, under dirs-sys. MPL-2.0's copyleft reaches the
+    # crate's own files, which stay public on crates.io, and none of the launcher's.
+    { name = "option-ext", allow = ["MPL-2.0"] },
+]
+
+[bans]
+multiple-versions = "allow"
+wildcards = "deny"
+allow-wildcard-paths = true
+deny = []
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"

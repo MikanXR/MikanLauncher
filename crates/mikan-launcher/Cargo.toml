@@ -1,0 +1,25 @@
+[package]
+name = "mikan-launcher"
+description = "The launcher's window."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "MikanLauncher"
+path = "src/main.rs"
+
+[dependencies]
+mikan-launcher-core.workspace = true
+rfd.workspace = true
+serde_json.workspace = true
+slint.workspace = true
+
+[build-dependencies]
+slint-build.workspace = true
+
+[lints]
+workspace = true

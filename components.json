@@ -1,0 +1,35 @@
+{
+    "components": [
+        {
+            "name": "MikanXR",
+            "repo": "MikanXR/MikanXR",
+            "tag": null,
+            "asset": "Mikan_*_Win64.zip",
+            "dest": "MikanXR"
+        },
+        {
+            "name": "MikanTrack",
+            "repo": "MikanXR/MikanTrack",
+            "tag": null,
+            "asset": "MikanTrack_*_Win64.zip",
+            "dest": "MikanTrack",
+            "optional": true
+        },
+        {
+            "name": "MikanXR_VNyan",
+            "repo": "MikanXR/MikanXR_VNyan",
+            "tag": null,
+            "asset": "MikanXR_VNyan_*.zip",
+            "dest": "plugins/vnyan",
+            "optional": true
+        },
+        {
+            "name": "MikanXR_Warudo",
+            "repo": "MikanXR/MikanXR_Warudo",
+            "tag": null,
+            "asset": "MikanXR_Warudo_*.zip",
+            "dest": "plugins/warudo",
+            "optional": true
+        }
+    ]
+}
