@@ -16,6 +16,15 @@
             "optional": true
         },
         {
+            "name": "MikanStudio",
+            "repo": "MikanXR/MikanStudio",
+            "tag": "v0.1.99",
+            "asset": "MikanStudio_*_Win64.zip",
+            "dest": "MikanStudio",
+            "token_env": "MIKANSTUDIO_RELEASE_TOKEN",
+            "optional": true
+        },
+        {
             "name": "MikanXR_VNyan",
             "repo": "MikanXR/MikanXR_VNyan",
             "tag": null,

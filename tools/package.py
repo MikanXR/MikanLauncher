@@ -13,6 +13,11 @@ Usage: python tools/package.py --launcher <MikanLauncher exe> [--out <dir>]
   --from-dir <dir>     a folder searched for each asset before GitHub, so a zip
                        built on this machine can stand in for a release
 
+A component in a private repository names, as "token_env", the environment
+variable holding a token that can read its releases. Its download runs under that
+token when the variable is set, and under the caller's own gh sign-in when it is
+not, so a run on a developer's machine needs no extra setup.
+
 A component whose pin has no tag, or whose asset cannot be fetched, is a gap. A
 gap in an optional component is reported and skipped. A gap in a required one
 fails the run, and so does any archive that is unreadable or holds an entry
@@ -56,6 +61,7 @@ def find_asset(component, from_dir, scratch):
         capture_output=True,
         text=True,
         check=False,
+        env=download_environment(component),
     )
 
     if fetched.returncode != 0:
@@ -67,6 +73,18 @@ def find_asset(component, from_dir, scratch):
         return None, None, f"release {tag} has no asset matching {pattern}"
 
     return matches[-1], version_of(matches[-1].name, pattern, tag), None
+
+
+def download_environment(component):
+    """The environment gh downloads the component under: the caller's, with the
+    component's own token as GH_TOKEN when its "token_env" variable is set."""
+    environment = dict(os.environ)
+    token = os.environ.get(component.get("token_env") or "", "")
+
+    if token:
+        environment["GH_TOKEN"] = token
+
+    return environment
 
 
 def version_of(name, pattern, tag):

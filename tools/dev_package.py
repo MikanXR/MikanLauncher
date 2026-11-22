@@ -14,7 +14,7 @@ Usage: python tools/dev_package.py [--out <dir>] [--clean]
   --clean                 remove the tree and exit
   --mikanxr <dir>         the folder holding Mikan.exe
   --mikantrack <dir>      the folder holding MikanTrack.exe
-  --mikanstudio <dir>     the folder holding MikanStudio.exe
+  --mikanstudio <dir>     the folder holding mikan-studio.exe
   --vnyan-plugin <repo>   the MikanXR_VNyan checkout, built
   --warudo-plugin <repo>  the MikanXR_Warudo checkout, built
 
@@ -49,7 +49,7 @@ LOCAL_CONFIG = REPO / "dev_package.local.json"
 APPS = [
     ("mikanxr", "MikanXR", "Mikan.exe", SIBLINGS / "MikanXR/build/src/Editor/RelWithDebInfo"),
     ("mikantrack", "MikanTrack", "MikanTrack.exe", SIBLINGS / "MikanTrack/build/Release"),
-    ("mikanstudio", "MikanStudio", "MikanStudio.exe", None),
+    ("mikanstudio", "MikanStudio", "mikan-studio.exe", None),
 ]
 
 # Each plugin: its option, its folder under plugins/, the manifest it gets when its
