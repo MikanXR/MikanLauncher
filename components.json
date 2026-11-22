@@ -3,14 +3,14 @@
         {
             "name": "MikanXR",
             "repo": "MikanXR/MikanXR",
-            "tag": null,
+            "tag": "v2026.11.21",
             "asset": "Mikan_*_Win64.zip",
             "dest": "MikanXR"
         },
         {
             "name": "MikanTrack",
             "repo": "MikanXR/MikanTrack",
-            "tag": null,
+            "tag": "v0.1.0",
             "asset": "MikanTrack_*_Win64.zip",
             "dest": "MikanTrack",
             "optional": true
@@ -27,7 +27,7 @@
         {
             "name": "MikanXR_VNyan",
             "repo": "MikanXR/MikanXR_VNyan",
-            "tag": null,
+            "tag": "v0.2.0",
             "asset": "MikanXR_VNyan_*.zip",
             "dest": "plugins/vnyan",
             "optional": true
@@ -35,7 +35,7 @@
         {
             "name": "MikanXR_Warudo",
             "repo": "MikanXR/MikanXR_Warudo",
-            "tag": null,
+            "tag": "v0.1.0",
             "asset": "MikanXR_Warudo_*.zip",
             "dest": "plugins/warudo",
             "optional": true

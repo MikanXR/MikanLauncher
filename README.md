@@ -109,7 +109,7 @@ python tools/package.py --launcher target/release/MikanLauncher.exe --from-dir <
 
 `--from-dir` lets a zip built on this machine stand in for a release. The Package workflow runs the same script on a `v*` tag or by hand and keeps the tree as an artifact. Upload to Steam is not part of it yet.
 
-MikanStudio is pinned at its first release. No other component has a published release yet, so their pins in `components.json` are empty. `MikanXR/MikanStudio` is a private repository, so its pin names a token of its own (`token_env`): the Package workflow passes the `MIKANSTUDIO_RELEASE_TOKEN` secret, a fine-grained token limited to that repository with read-only Contents, and a run on a developer's machine falls back to its own `gh` sign-in.
+Every component in `components.json` is pinned at its first release. `MikanXR/MikanStudio` is a private repository, so its pin names a token of its own (`token_env`): the Package workflow passes the `MIKANSTUDIO_RELEASE_TOKEN` secret, a fine-grained token limited to that repository with read-only Contents, and a run on a developer's machine falls back to its own `gh` sign-in.
 
 ## Credits
 
