@@ -10,7 +10,7 @@
         {
             "name": "MikanTrack",
             "repo": "MikanXR/MikanTrack",
-            "tag": "v0.1.0",
+            "tag": "v0.1.1",
             "asset": "MikanTrack_*_Win64.zip",
             "dest": "MikanTrack",
             "optional": true
