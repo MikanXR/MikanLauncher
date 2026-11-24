@@ -27,6 +27,8 @@ steamlocate = "2.1"
 sysinfo = { version = "0.40", default-features = false, features = ["system"] }
 tempfile = "3"
 thiserror = "2"
+# The executable's icon and version resource, written by the window crate's build script.
+winresource = "0.1"
 windows = { version = "0.62", features = ["Win32_Foundation", "Win32_UI_WindowsAndMessaging"] }
 
 [workspace.lints.rust]

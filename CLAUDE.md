@@ -15,6 +15,7 @@ Guidance for Claude Code when working in this repository. MikanLauncher is the t
 - `crates/mikan-launcher`: the window (`ui/main.slint`) and its wiring to the hub
 - `catalog.json`: the shipped catalog
 - `components.json` and `tools/package.py`: the package assembly
+- `branding/generic`: the icon and logo any checkout builds with. `crates/mikan-launcher/build.rs` picks the branding folder and embeds it
 
 ## Working agreements
 
@@ -23,6 +24,8 @@ Guidance for Claude Code when working in this repository. MikanLauncher is the t
 - The launcher never starts a second copy of a running app. The editor does not survive one. Any new launch path keeps the running check.
 - Plugin state is a content comparison. Do not add version parsing of compiled plugins or marker files inside a host app.
 - `catalog.json` is data. A Steam app id or executable name is looked up and confirmed before it is added, never guessed.
+- The official MikanXR art is trademark art and never enters a tracked path. It comes from `MIKAN_BRANDING_DIR` or the ignored `branding/official` checkout, and `branding/generic` holds only generic art under the same file names.
+- The markup names a branding image by file name alone. The build script puts the chosen folder on Slint's include path.
 - The window uses Slint's software renderer only. Do not add a GPU renderer feature.
 - A new dependency passes `cargo deny check`. A license outside the allowlist is read before it is added to `deny.toml`.
 - Run every gate in the README before calling a change done. Clippy's `all` and `pedantic` groups are warnings that fail CI, so a warning is fixed, not allowed away.

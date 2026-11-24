@@ -65,6 +65,8 @@ cargo run -- --root .
 
 `--root <dir>` names the package folder (the launcher's own folder by default), `--settings <file>` names another settings file, and `--status` prints each slot's state as JSON and exits without opening a window.
 
+The icon and logo are embedded at build time from one branding folder, which holds `icon.ico` for the executable and `icon.png` for the window. The build takes the folder the `MIKAN_BRANDING_DIR` environment variable names, else `branding/official/mikanlauncher` when that folder exists, else `branding/generic`, and prints the one it used as a `Branding:` line. The repository carries only the generic set, so a fork builds without anything more. The official art lives in the private `MikanXR/MikanBranding` repository, and `branding/official` is where a checkout of it goes, ignored by git.
+
 In VS Code, F5 builds and debugs the launcher through the configurations in `.vscode/launch.json`, which use the C/C++ extension's debugger. Tests get Run and Debug links above each test from rust-analyzer.
 
 A run against the repository root has no bundled apps or plugins. `tools/dev_package.py` (the "Dev package" task) assembles `package/` from this machine's own builds instead: it links each app's build folder into the tree and copies each plugin's built files in beside a generated `plugin.json`. The "Launcher (package folder)" debug configuration then runs against it.
@@ -109,7 +111,13 @@ python tools/package.py --launcher target/release/MikanLauncher.exe --from-dir <
 
 `--from-dir` lets a zip built on this machine stand in for a release. The Package workflow runs the same script on a `v*` tag or by hand and keeps the tree as an artifact. Upload to Steam is not part of it yet.
 
+The Package workflow checks out `MikanXR/MikanBranding` at its `v1` tag into `branding/official` before the build, with the read-only deploy key in the `MIKAN_BRANDING_DEPLOY_KEY` secret. A run without the secret builds with the generic set, except a tag build under the `MikanXR` owner, which fails when the official set is missing. The CI workflow always builds with the generic set.
+
 Every component in `components.json` is pinned at its first release. `MikanXR/MikanStudio` is a private repository, so its pin names a token of its own (`token_env`): the Package workflow passes the `MIKANSTUDIO_RELEASE_TOKEN` secret, a fine-grained token limited to that repository with read-only Contents, and a run on a developer's machine falls back to its own `gh` sign-in.
+
+## License
+
+The code is under the MIT license in `LICENSE`. The MikanXR name and logo are not covered by that license, and the official icon and logo art is not part of this repository.
 
 ## Credits
 

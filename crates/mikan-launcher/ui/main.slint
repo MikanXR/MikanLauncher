@@ -35,6 +35,9 @@ export component MainWindow inherits Window {
     callback stop-all();
 
     title: "MikanXR Launcher";
+    // The build's branding folder is on the include path, so the name alone finds the
+    // icon of whichever set the build chose.
+    icon: @image-url("icon.png");
     preferred-width: 640px;
     min-width: 520px;
 
@@ -50,9 +53,21 @@ export component MainWindow inherits Window {
             border-radius: 4px;
 
             VerticalBox {
-                Text {
-                    text: "MikanXR Launcher " + root.launcher-version;
-                    font-weight: 700;
+                HorizontalBox {
+                    padding: 0;
+
+                    Image {
+                        source: @image-url("icon.png");
+                        width: 48px;
+                        height: 48px;
+                    }
+
+                    Text {
+                        horizontal-stretch: 1;
+                        vertical-alignment: center;
+                        text: "MikanXR Launcher " + root.launcher-version;
+                        font-weight: 700;
+                    }
                 }
 
                 if root.package-text != "": Text {
@@ -66,6 +81,24 @@ export component MainWindow inherits Window {
     }
 
     VerticalBox {
+        HorizontalBox {
+            padding: 0;
+
+            Image {
+                source: @image-url("icon.png");
+                width: 32px;
+                height: 32px;
+            }
+
+            Text {
+                horizontal-stretch: 1;
+                vertical-alignment: center;
+                text: "MikanXR Launcher";
+                font-size: 18px;
+                font-weight: 700;
+            }
+        }
+
         for row[index] in root.rows: GroupBox {
             title: row.title;
 

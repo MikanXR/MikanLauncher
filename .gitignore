@@ -10,3 +10,6 @@
 # Local tool state
 .claude/*
 !.claude/settings.json
+
+# A checkout of the official branding art, which is not part of this repository
+/branding/official/
